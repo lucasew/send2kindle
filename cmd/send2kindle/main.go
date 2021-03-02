@@ -4,8 +4,6 @@ import (
 	"flag"
 	"os"
 	"path/filepath"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
 var ( // Authentication parameters
@@ -58,8 +56,8 @@ func main() {
             books[i] = ConvertToMobi(books[i])
         }
     }
-    spew.Dump(books)
-    spew.Dump(KINDLE_EMAIL)
+    Spew(books)
+    Spew(KINDLE_EMAIL)
     email := Email{
         To: KINDLE_EMAIL,
         Files: books,

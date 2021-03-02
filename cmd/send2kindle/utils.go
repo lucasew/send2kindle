@@ -4,6 +4,8 @@ import (
 	"log"
 	"os"
 	"os/exec"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 func MustBinary(binary string) {
@@ -38,6 +40,13 @@ func Fatalf(str string, v ...interface{}) {
 
 func Log(str string, v ...interface{}) {
     log.Printf(str, v...)
+}
+
+var showSpewMessages = false
+func Spew(v interface{}) {
+    if (showSpewMessages) {
+        spew.Dump(v)
+    }
 }
 
 func Command(binary string, args ...string) error {
