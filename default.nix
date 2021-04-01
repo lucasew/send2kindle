@@ -5,7 +5,7 @@ pkgs.buildGoModule rec {
   vendorSha256 = "sha256-cptWnGcOPcL4aFsYL/zdf9b5tlySLtlqjA4SVqKL5D4=";
   src = ./.;
   buildInputs = with pkgs; [
-    calibre-py2
+    calibre
   ];
   meta = with pkgs.lib; {
     description = "send2kindle: basically send files over email to your kindle with the option to convert to mobi before using calibre";
