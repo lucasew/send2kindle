@@ -15,7 +15,7 @@ var ( // Authentication parameters
 
 var (
     books = []string{}
-    convertToMobi = false
+    convertToEPUB = false
 )
 
 func init() {
@@ -23,7 +23,7 @@ func init() {
     flag.StringVar(&SMTP_PASSWD, "p", "", "SMTP server password")
     flag.StringVar(&SMTP_SERVER, "s", "", "SMTP server")
     flag.StringVar(&KINDLE_EMAIL, "k", "", "Kindle destination email")
-    flag.BoolVar(&convertToMobi, "c", false, "Convert to mobi before sending")
+    flag.BoolVar(&convertToEPUB, "c", false, "Convert to EPUB before sending")
     flag.Parse()
     SMTP_USER = FallbackStringVariable("SMTP_USER", SMTP_USER)
     SMTP_PASSWD = FallbackStringVariable("SMTP_PASSWD", SMTP_PASSWD)
@@ -50,10 +50,10 @@ func main() {
         User: SMTP_USER,
         Password: SMTP_PASSWD,
     }
-    if (convertToMobi) {
-        Log("Converting books to MOBI")
+    if (convertToEPUB) {
+        Log("Converting books to EPUB")
         for i := 0; i < len(books); i++ {
-            books[i] = ConvertToMobi(books[i])
+            books[i] = ConvertToEPUB(books[i])
         }
     }
     Spew(books)
