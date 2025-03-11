@@ -6,7 +6,7 @@
 buildGoModule {
   name = "send2kindle";
   version = "0.0.1";
-  vendorHash = "sha256-cptWnGcOPcL4aFsYL/zdf9b5tlySLtlqjA4SVqKL5D4=";
+  vendorHash = "sha256-TKzqGLYjkiq2EYNP4bMXWx5JpagMXCJkSVEgE0BmLDw=";
   src = ./.;
   buildInputs = [
     calibre
