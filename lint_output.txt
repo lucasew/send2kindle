@@ -1,0 +1,6 @@
+[lint:python] $ ruff check .
+[lint:go] $ golangci-lint run
+[lint:python] All checks passed!
+[lint:python] Finished in 119.6ms
+[lint:go] Finished in 1.57s
+Finished in 1.59s

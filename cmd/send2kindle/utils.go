@@ -15,10 +15,10 @@ func MustBinary(binary string) {
     }
 }
 
-func MustSucess(err error) {
-    if err != nil {
-        Fatalf("Fatal error: %s", err)
-    }
+func MustSuccess(err error) {
+	if err != nil {
+		Fatalf("Fatal error: %s", err)
+	}
 }
 
 // FallbackStringVariable If string is a empty use environment variable, if env variable is a empty panics
