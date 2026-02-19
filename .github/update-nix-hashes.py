@@ -19,21 +19,25 @@ original_text = PACKAGE_NIX.read_text()
 
 
 findings = OLD_HASH_RE.findall(original_text)
-print('[DEBUG] findings old', findings)
+print("[DEBUG] findings old", findings)
 assert len(findings) == 1
 
 old_hash = findings[0].strip()
 
 PACKAGE_NIX.write_text(original_text.replace(old_hash, EMPTY_HASH))
 
-drvPath = subprocess.run(['nix-instantiate', 'default.nix'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-print('drvPath', drvPath)
+drvPath = subprocess.run(
+    ["nix-instantiate", "default.nix"], stdout=subprocess.PIPE
+).stdout.decode("utf-8")
+print("drvPath", drvPath)
 
-build_proc = subprocess.run(['nix-store', '-r', drvPath.strip()], stderr=subprocess.PIPE)
-build_log = build_proc.stderr.decode('utf-8')
+build_proc = subprocess.run(
+    ["nix-store", "-r", drvPath.strip()], stderr=subprocess.PIPE
+)
+build_log = build_proc.stderr.decode("utf-8")
 
 findings = NEW_HASH_FROM_LOGS_RE.findall(build_log)
-print('[DEBUG] findings new', findings)
+print("[DEBUG] findings new", findings)
 assert len(findings) == 1
 new_hash = findings[0].strip()
 PACKAGE_NIX.write_text(original_text.replace(old_hash, new_hash))

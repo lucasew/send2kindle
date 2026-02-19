@@ -18,9 +18,7 @@ func CreateTempFileName(extension string) (filename string) {
 	return filename
 }
 
-var (
-	cleanupHooks = []func(){}
-)
+var cleanupHooks = []func(){}
 
 func AddCleanupHook(f func()) {
 	cleanupHooks = append(cleanupHooks, f)
