@@ -1,6 +1,6 @@
 module github.com/lucasew/send2kindle
 
-go 1.23
+go 1.22
 
 require (
 	github.com/davecgh/go-spew v1.1.1

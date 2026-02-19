@@ -5,7 +5,7 @@ ruff = "0.6.9"
 golangci-lint = "1.61.0"
 
 [tasks]
-"install" = "go mod download && go install mvdan.cc/gofumpt@latest"
+"install" = "go mod download && go install mvdan.cc/gofumpt@v0.7.0"
 "lint:go" = "golangci-lint run"
 "lint:python" = "ruff check ."
 "lint" = { depends = ["lint:*"] }
