@@ -1,0 +1,19 @@
+[tools]
+go = "1.23.2"
+python = "3.12.0"
+ruff = "0.6.9"
+golangci-lint = "1.61.0"
+
+[tasks]
+"install" = "go mod download && go install mvdan.cc/gofumpt@latest"
+"lint:go" = "golangci-lint run"
+"lint:python" = "ruff check ."
+"lint" = { depends = ["lint:*"] }
+"fmt:go" = "gofumpt -w ."
+"fmt:python" = "ruff format ."
+"fmt" = { depends = ["fmt:*"] }
+"test:go" = "go test ./..."
+"test" = { depends = ["test:*"] }
+"codegen:nix" = "python3 .github/update-nix-hashes.py"
+"codegen" = { depends = ["codegen:*"] }
+"ci" = { depends = ["lint", "test"] }
