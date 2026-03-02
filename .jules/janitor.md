@@ -1,1 +1,1 @@
-- 2026-03-02: Always configure mise to handle formatting and linting tasks in Go repositories.
+- 2026-03-02: When upstream Nix channel breakages occur on rolling releases, temporarily pin to a stable channel like nixos-24.05.
