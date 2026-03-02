@@ -1,0 +1,1 @@
+- 2026-03-02: Always configure mise to handle formatting and linting tasks in Go repositories.
