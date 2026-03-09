@@ -33,9 +33,9 @@ func init() {
     books = make([]string, 0, len(args))
     for _, book := range args {
         abs, err := filepath.Abs(book)
-        MustSucess(err)
+        MustSuccess(err)
         _, err = os.Stat(abs)
-        MustSucess(err)
+        MustSuccess(err)
         books = append(books, abs)
     }
     if len(books) == 0 {
@@ -63,6 +63,6 @@ func main() {
         Files: books,
     }
     Log("Sending email...")
-    MustSucess(SendEmail(mail_auth, email))
+    MustSuccess(SendEmail(mail_auth, email))
     Log("Done!")
 }

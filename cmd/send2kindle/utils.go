@@ -15,7 +15,7 @@ func MustBinary(binary string) {
     }
 }
 
-func MustSucess(err error) {
+func MustSuccess(err error) {
     if err != nil {
         Fatalf("Fatal error: %s", err)
     }
