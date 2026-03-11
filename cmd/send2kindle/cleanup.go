@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"path/filepath"
+	"path"
 
 	"github.com/google/uuid"
 )
@@ -11,7 +11,7 @@ import (
 func CreateTempFileName(extension string) (filename string) {
     tmpdir := os.TempDir()
     generatedName := uuid.New().String()
-    filename = filepath.Join(tmpdir, fmt.Sprintf("%s.%s", generatedName, extension))
+    filename = path.Join(tmpdir, fmt.Sprintf("%s.%s", generatedName, extension))
     AddCleanupHook(func() {
         os.Remove(filename)
     })

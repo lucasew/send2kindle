@@ -21,7 +21,7 @@ func MustSucess(err error) {
     }
 }
 
-// FallbackStringVariable If string is a empty use environment variable, if env variable is a empty panics
+// FallbackStringVariable If string is empty, use environment variable. If env variable is empty, it panics.
 func FallbackStringVariable(env string, def string) string {
     if def != "" {
         return def

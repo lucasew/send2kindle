@@ -1,1 +1,1 @@
-- 2024-05-15: Use path/filepath instead of path for joining file paths on the local OS system.
+- 2024-05-15: Fix documentation typos to ensure grammatical correctness and clarity.
