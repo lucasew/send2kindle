@@ -9,25 +9,25 @@ import (
 )
 
 func CreateTempFileName(extension string) (filename string) {
-	tmpdir := os.TempDir()
-	generatedName := uuid.New().String()
-	filename = filepath.Join(tmpdir, fmt.Sprintf("%s.%s", generatedName, extension))
-	AddCleanupHook(func() {
-		os.Remove(filename)
-	})
-	return filename
+    tmpdir := os.TempDir()
+    generatedName := uuid.New().String()
+    filename = filepath.Join(tmpdir, fmt.Sprintf("%s.%s", generatedName, extension))
+    AddCleanupHook(func() {
+        os.Remove(filename)
+    })
+    return filename
 }
 
 var (
-	cleanupHooks = []func(){}
+    cleanupHooks = []func(){}
 )
 
 func AddCleanupHook(f func()) {
-	cleanupHooks = append(cleanupHooks, f)
+    cleanupHooks = append(cleanupHooks, f)
 }
 
 func Cleanup() {
-	for _, f := range cleanupHooks {
-		f()
-	}
+    for _, f := range cleanupHooks {
+        f()
+    }
 }
