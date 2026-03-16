@@ -1,0 +1,1 @@
+- 2026-03-16: [Medium] Swallowed errors in cleanup routines mask underlying resource leaks or permission issues.
