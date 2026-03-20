@@ -2,32 +2,35 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
-	"path"
+	"path/filepath"
 
 	"github.com/google/uuid"
 )
 
 func CreateTempFileName(extension string) (filename string) {
-    tmpdir := os.TempDir()
-    generatedName := uuid.New().String()
-    filename = path.Join(tmpdir, fmt.Sprintf("%s.%s", generatedName, extension))
-    AddCleanupHook(func() {
-        os.Remove(filename)
-    })
-    return filename
+	tmpdir, err := ioutil.TempDir("", "send2kindle-*")
+	MustSucess(err)
+	generatedName := uuid.New().String()
+	filename = filepath.Join(tmpdir, fmt.Sprintf("%s.%s", generatedName, extension))
+	AddCleanupHook(func() {
+		err := os.RemoveAll(tmpdir)
+		ReportError(err)
+	})
+	return filename
 }
 
 var (
-    cleanupHooks = []func(){}
+	cleanupHooks = []func(){}
 )
 
 func AddCleanupHook(f func()) {
-    cleanupHooks = append(cleanupHooks, f)
+	cleanupHooks = append(cleanupHooks, f)
 }
 
 func Cleanup() {
-    for _, f := range cleanupHooks {
-        f()
-    }
+	for _, f := range cleanupHooks {
+		f()
+	}
 }

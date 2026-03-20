@@ -1,0 +1,1 @@
+- 2026-03-20: [High] Insecure temporary files in shared directories. Look for `os.TempDir()` or `path.Join(os.TempDir(), ...)` used without creating a directory with restrictive permissions (`0700`) first.
