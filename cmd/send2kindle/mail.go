@@ -9,33 +9,41 @@ import (
 )
 
 type Email struct {
-    To string
-    Files []string
+	To    string
+	Files []string
 }
 
 type EmailAuthenticationData struct {
-    Server string
-    User string
-    Password string
+	Server   string
+	User     string
+	Password string
+}
+
+func (msg *Email) BuildMessage(from string) (*email.Message, error) {
+	m := email.NewMessage("", "")
+	m.To = []string{msg.To}
+	m.From = mail.Address{Name: "", Address: from}
+	for _, file := range msg.Files {
+		err := m.Attach(file)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return m, nil
 }
 
 func SendEmail(s EmailAuthenticationData, msgs ...Email) error {
-    serverOnly := strings.Split(s.Server, ":")[0]
-    auth := smtp.PlainAuth("", s.User, s.Password, serverOnly)
-    for _, msg := range msgs {
-        m := email.NewMessage("", "")
-        m.To = []string{msg.To}
-        m.From = mail.Address{Name: "", Address: s.User}
-        for _, file := range msg.Files {
-            err := m.Attach(file)
-            if err != nil {
-                return err
-            }
-        }
-        err := email.Send(s.Server, auth, m)
-        if err != nil {
-            return err
-        }
-    }
-    return nil
+	serverOnly := strings.Split(s.Server, ":")[0]
+	auth := smtp.PlainAuth("", s.User, s.Password, serverOnly)
+	for _, msg := range msgs {
+		m, err := msg.BuildMessage(s.User)
+		if err != nil {
+			return err
+		}
+		err = email.Send(s.Server, auth, m)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }

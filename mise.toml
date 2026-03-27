@@ -1,0 +1,18 @@
+[tools]
+go = "1.21.0"
+
+[tasks."lint:vet"]
+description = "Run go vet"
+run = "go vet ./..."
+
+[tasks."fmt:go"]
+description = "Run go fmt"
+run = "gofmt -s -w ."
+
+[tasks."test:go"]
+description = "Run tests"
+run = "go test -v ./..."
+
+[tasks.ci]
+description = "Run CI pipeline locally"
+depends = ["lint:*", "fmt:*", "test:*"]
