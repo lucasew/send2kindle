@@ -18,7 +18,8 @@ func MustBinary(binary string) {
 // ReportError Centralized error handling as per project guidelines
 func ReportError(err error, contextMsg string, v ...interface{}) {
 	if err != nil {
-		log.Printf("ERROR: "+contextMsg+": %v\n", append(v, err)...)
+        allArgs := append(v, err)
+        log.Println(append([]interface{}{"ERROR: " + contextMsg + ":"}, allArgs...)...)
 	}
 }
 
